@@ -2,12 +2,12 @@ import os
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-78fa1ce05c7b48d2bc69e7b28baa64f3",
-    base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    api_key="ollama",
+    base_url = "http://localhost:11434/v1",
 )
 
 compiletion = client.chat.completions.create(
-    model = "qwen-plus",
+    model = "qwen3:32b",
     messages=[
         {"role":"system","content":"你是一个有用的助手"},
         {"role":"user","content":"请写一个关于机器学习的程序"}
