@@ -1,6 +1,7 @@
 from langchain_core.output_parsers import JsonOutputParser,StrOutputParser
 from langchain_community.chat_models.tongyi import ChatTongyi
 from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnableLambda
 from dotenv import load_dotenv
 import os
 
@@ -23,8 +24,11 @@ second_prompt = PromptTemplate.from_template(
     "名字是{name},请帮我解析这名字的含义"
 )
 
+# 函数的入参：AiMessage -> dict ({"name":"xxx"})
+my_func = RunnableLambda(lambda ai_msg: {"name":ai_msg.content})
+
 # 构建chain
-chain = first_prompt | model | json_parser | second_prompt | model | str_parser
+chain = first_prompt | model | my_func | second_prompt | model | str_parser
 
 res = chain.invoke({"lastname":"刘","hobby":"唱歌","gender":"男孩"})
 print(res)
