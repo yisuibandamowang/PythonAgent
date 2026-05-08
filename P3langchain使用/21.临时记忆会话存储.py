@@ -17,8 +17,11 @@ prompt = PromptTemplate.from_template(
 str_parser = StrOutputParser()
 json_parser = JsonOutputParser()
 
+def print_prompt(inputs):
+    print("=" * 20 ,inputs.to_string() ,"=" * 20)
+    return inputs
 
-base_chain = prompt | model | str_parser
+base_chain = prompt | print_prompt | model | str_parser
 
 store = {} #key session,value 就是 inmemorychatmessagehistory 类对象
 
