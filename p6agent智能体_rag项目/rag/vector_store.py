@@ -13,7 +13,7 @@ from p6agent智能体_rag项目.utils.file_handler import txt_loader, pdf_loader
 
 
 class VectorStoreService:
-    def __init__(self, config):
+    def __init__(self, config=chroma_conf):
         self.vector_store = Chroma(
             collection_name=chroma_conf["collection_name"],
             embedding_function=embed_model,
