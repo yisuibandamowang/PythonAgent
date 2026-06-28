@@ -1,6 +1,7 @@
 import sys
 import os
 from dotenv import load_dotenv
+from hello_agents import HelloAgentsLLM
 
 # 确保当前目录在 Python 搜索路径中
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -13,7 +14,9 @@ from my_llm import MyLLM # 注意:这里导入我们自己的类
 load_dotenv()
 
 # 实例化我们重写的客户端，并指定provider
-llm = MyLLM(provider="modelscope")
+# 无需传入 provider，框架会自动检测
+llm = HelloAgentsLLM()
+# 框架内部日志会显示检测到 provider 为 'ollama'
 
 # 准备消息
 messages = [{"role": "user", "content": "你好，请介绍一下你自己。"}]
